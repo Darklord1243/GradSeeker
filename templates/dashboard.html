@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - GradSeeker{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Dashboard</h1>
+    <p class="lead">Welcome, {{ current_user.username }}!</p>
+    
+    <div class="row dashboard-row">
+        <!-- Step 9.1: Dashboard UI Structure - Profile Section (The Wallet) -->
+        <!-- Step 9.2: Dashboard Styles - Responsive Bootstrap Grid -->
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="h4 mb-3">Your Profile (The Wallet)</h2>
+                    <p class="card-description mb-4">Update your academic credentials to get accurate compatibility scores.</p>
+                    
+                    <form method="POST" action="/dashboard/update-profile">
+                        <div class="mb-3">
+                            <label for="gpa" class="form-label">GPA</label>
+                            <input type="number" step="0.01" min="0" max="4.0" class="form-control" 
+                                   id="gpa" name="gpa" value="{{ current_user.gpa or '' }}" 
+                                   placeholder="e.g., 3.58" required>
+                            <div class="form-text">Enter your Grade Point Average (0.0 - 4.0)</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="toefl_score" class="form-label">TOEFL Score</label>
+                            <input type="number" min="0" max="120" class="form-control" 
+                                   id="toefl_score" name="toefl_score" value="{{ current_user.toefl_score or '' }}" 
+                                   placeholder="e.g., 104" required>
+                            <div class="form-text">Enter your TOEFL score (0 - 120)</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="internship_exp" class="form-label">Internship Experience (Months)</label>
+                            <input type="number" min="0" class="form-control" 
+                                   id="internship_exp" name="internship_exp" value="{{ current_user.internship_exp or '' }}" 
+                                   placeholder="e.g., 6" required>
+                            <div class="form-text">Enter months of internship experience</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="research_papers" class="form-label">Research Papers Count</label>
+                            <input type="number" min="0" class="form-control" 
+                                   id="research_papers" name="research_papers" value="{{ current_user.research_papers or '' }}" 
+                                   placeholder="e.g., 2" required>
+                            <div class="form-text">Enter number of published research papers/posters</div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Shortlist Section -->
+        <!-- Step 9.2: Dashboard Styles - Responsive Bootstrap Grid -->
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="h4 mb-3">Your Shortlist</h2>
+            
+                    {% if shortlist_data %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Program</th>
+                                    <th>University</th>
+                                    <th>Date Added</th>
+                                    <th>Compatibility</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for program, date_added in shortlist_data %}
+                                <tr>
+                                    <td>
+                                        <a href="/programs/{{ program.id }}">{{ program.name }}</a>
+                                    </td>
+                                    <td>{{ program.university.name }}</td>
+                                    <td>
+                                        {% if date_added %}
+                                        {{ date_added.strftime('%Y-%m-%d %H:%M') }}
+                                        {% else %}
+                                        N/A
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% set status, color = program.calculate_compatibility(current_user) %}
+                                        {% if color == "success" %}
+                                            <span class="badge badge-safe">{{ status }}</span>
+                                        {% elif color == "warning" %}
+                                            <span class="badge badge-target">{{ status }}</span>
+                                        {% elif color == "danger" %}
+                                            <span class="badge badge-reach">{{ status }}</span>
+                                        {% else %}
+                                            <span class="badge bg-{{ color }}">{{ status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/shortlist/remove/{{ program.id }}" class="d-inline">
+                                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info" role="alert">
+                        Your shortlist is empty. <a href="/browse">Browse programs</a> to add programs to your shortlist.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

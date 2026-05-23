@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}{{ program.name }} - GradSeeker{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="Breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/browse">Browse</a></li>
+            <li class="breadcrumb-item"><a href="/browse/{{ program.university.country|country_slug }}">{{ program.university.country }}</a></li>
+            <li class="breadcrumb-item"><a href="/universities/{{ program.university.id }}/programs">{{ program.university.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ program.name }}</li>
+        </ol>
+    </nav>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="mb-3">{{ program.name }}</h1>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">Program Information</h2>
+                    
+                    <dl class="row">
+                        <dt class="col-sm-4">University</dt>
+                        <dd class="col-sm-8">
+                            <strong>{{ program.university.name }}</strong>
+                            <br>
+                            <span class="card-description">{{ program.university.country }}</span>
+                            {% if program.university.qs_rank %}
+                            <br>
+                            <span class="card-description">QS Ranking: #{{ program.university.qs_rank }}</span>
+                            {% endif %}
+                        </dd>
+                        
+                        {% if program.category %}
+                        <dt class="col-sm-4">Category</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-secondary">{{ program.category }}</span>
+                        </dd>
+                        {% endif %}
+                        
+                        <dt class="col-sm-4">Minimum GPA</dt>
+                        <dd class="col-sm-8"><strong>{{ program.min_gpa }}</strong></dd>
+                        
+                        <dt class="col-sm-4">Minimum TOEFL</dt>
+                        <dd class="col-sm-8"><strong>{{ program.min_toefl }}</strong></dd>
+                        
+                        {% if program.tuition_fee %}
+                        <dt class="col-sm-4">Tuition Fee</dt>
+                        <dd class="col-sm-8">{{ program.tuition_fee }}</dd>
+                        {% endif %}
+                        
+                        {% if program.deadline %}
+                        <dt class="col-sm-4">Application Deadline</dt>
+                        <dd class="col-sm-8">{{ program.deadline }}</dd>
+                        {% endif %}
+                        
+                        <dt class="col-sm-4">Focus Areas</dt>
+                        <dd class="col-sm-8">
+                            {% if program.research_focus %}
+                            <span class="badge bg-info me-1">Research Focus</span>
+                            {% endif %}
+                            {% if program.industry_focus %}
+                            <span class="badge bg-success me-1">Industry Focus</span>
+                            {% endif %}
+                            {% if not program.research_focus and not program.industry_focus %}
+                            <span class="card-description">No specific focus areas</span>
+                            {% endif %}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            
+            {% if current_user.is_authenticated %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">Compatibility Assessment</h2>
+                    {% set status, color = program.calculate_compatibility(current_user) %}
+                    {% if color == "success" %}
+                        <div class="alert badge-safe" role="alert">
+                            <strong>Compatibility Status:</strong> {{ status }}
+                        </div>
+                    {% elif color == "warning" %}
+                        <div class="alert badge-target" role="alert">
+                            <strong>Compatibility Status:</strong> {{ status }}
+                        </div>
+                    {% elif color == "danger" %}
+                        <div class="alert badge-reach" role="alert">
+                            <strong>Compatibility Status:</strong> {{ status }}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-{{ color }}" role="alert">
+                            <strong>Compatibility Status:</strong> {{ status }}
+                        </div>
+                    {% endif %}
+                    <p class="card-description small mb-0">
+                        Based on your profile: GPA {{ current_user.gpa }}, TOEFL {{ current_user.toefl_score }}, 
+                        {% if current_user.research_papers > 0 %}{{ current_user.research_papers }} research paper{{ 's' if current_user.research_papers != 1 else '' }}, {% endif %}
+                        {% if current_user.internship_exp > 0 %}{{ current_user.internship_exp }} month{{ 's' if current_user.internship_exp != 1 else '' }} internship experience{% else %}no internship experience{% endif %}.
+                    </p>
+                </div>
+            </div>
+            {% else %}
+            <div class="alert alert-info" role="alert">
+                <a href="/login">Log in</a> to see your compatibility assessment with this program.
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card sidebar-card">
+                <div class="card-body">
+                    {% if get_logo_url(program.university) %}
+                    <div class="logo-container">
+                        <img src="{{ get_logo_url(program.university) }}" 
+                             alt="{{ program.university.name }} logo">
+                    </div>
+                    {% endif %}
+                    
+                    <h3 class="h6 mb-3">{{ program.university.name }}</h3>
+                    
+                    {% if current_user.is_authenticated %}
+                    <form method="POST" action="/shortlist/add/{{ program.id }}" class="mb-3">
+                        <button type="submit" class="btn btn-primary w-100">Add to List</button>
+                    </form>
+                    {% else %}
+                    <p class="card-description small">
+                        <a href="/login">Log in</a> to add this program to your shortlist.
+                    </p>
+                    {% endif %}
+                    
+                    <a href="/universities/{{ program.university.id }}/programs" class="btn btn-outline-secondary w-100">
+                        View All Programs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

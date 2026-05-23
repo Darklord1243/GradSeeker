@@ -1,0 +1,1644 @@
+/*
+ * Custom CSS for GradSeeker
+ * SRS UI-08 to UI-12: Dark mode color palette and styling
+ */
+
+/* CSS Variables (Root Scope) - SRS 2.5, UI-08 */
+:root {
+    /* Cinematic Dark Theme Colors (SRS UI-08) */
+    --bg-primary: #0a0a0a;        /* Deep matte black background */
+    --bg-card: #161616;            /* Dark grey cards */
+    --text-primary: #ffffff;       /* Bold white headings (SRS UI-11) */
+    --text-secondary: #a1a1a1;     /* Medium muted grey metadata */
+    --accent-blue: #0066ff;        /* Electric Blue (SRS UI-12) */
+    --accent-purple: #9333ea;      /* Neon Purple (SRS UI-12) */
+    --shadow-glow: rgba(0, 102, 255, 0.3); /* Glow effect for hover */
+    --border-subtle: rgba(255, 255, 255, 0.08); /* Subtle borders */
+}
+
+/* Base Dark Theme Styling */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Container Improvements */
+.container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Typography Hierarchy (SRS UI-11) */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+p, .text-muted, .metadata {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* Instruction Text */
+.instruction-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #c5c5c5; /* Lighter grey for better contrast */
+}
+
+/* Card Description Text */
+.card-description {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #c0c0c0; /* Lighter grey for better contrast */
+}
+
+/* Card Title */
+.card-title {
+    color: var(--text-primary) !important;
+    font-weight: 700;
+}
+
+/* Card Text */
+.card-text {
+    color: #c0c0c0;
+}
+
+/* Override text-muted in cards to use better contrast */
+.card .text-muted {
+    color: #c0c0c0 !important;
+}
+
+/* Borderless Card Design (SRS UI-09) */
+.card {
+    background-color: var(--bg-card);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px var(--shadow-glow); /* Glow effect (SRS UI-09) */
+}
+
+.card-body {
+    padding: 2.5rem;
+}
+
+/* Step 10.3: Borderless Card Design with Hover Effects (SRS UI-09) */
+/* Program Card */
+.program-card {
+    background-color: var(--bg-card);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.program-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 102, 255, 0.2);
+}
+
+/* University Card */
+.university-card {
+    background-color: var(--bg-card);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.university-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 102, 255, 0.2);
+}
+
+/* Step 10.4: Visual Focus */
+.badge-safe {
+    background-color: var(--accent-blue) !important; /* Electric Blue */
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+}
+
+.badge-reach {
+    background-color: var(--accent-purple) !important; /* Neon Purple */
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+}
+
+.badge-target {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+}
+
+/* Alert versions for compatibility badges (used in program detail page) */
+.alert.badge-safe,
+div.alert.badge-safe {
+    background-color: #0066ff !important; /* Electric Blue */
+    background: #0066ff !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.alert.badge-reach,
+div.alert.badge-reach {
+    background-color: #9333ea !important; /* Neon Purple */
+    background: #9333ea !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.alert.badge-target,
+div.alert.badge-target {
+    background: linear-gradient(135deg, #0066ff, #9333ea) !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Form Styling for Dark Theme */
+.form-label {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.01em;
+}
+
+.form-control {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    height: auto;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.form-control:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-blue);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15);
+    outline: none;
+}
+
+/* Form Select (Dropdown) Styling for Dark Theme */
+.form-select {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem;
+}
+
+.form-select:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.form-select:focus,
+.form-select:focus-visible {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-blue);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15);
+    outline: 3px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+.form-select option {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+}
+
+/* Form Group Spacing */
+.mb-3 {
+    margin-bottom: 1.5rem !important;
+}
+
+/* Form Helper Text - Fixed Contrast for Dark Theme */
+.form-text {
+    color: #b0b0b0 !important;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Buttons with Accent Colors (SRS UI-12) */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.01em;
+}
+
+.btn-primary {
+    background-color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: var(--text-primary);
+}
+
+.btn-primary:hover {
+    background-color: #0052cc;
+    border-color: #0052cc;
+    box-shadow: 0 8px 24px var(--shadow-glow);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px var(--shadow-glow);
+}
+
+/* Button Focus Indicators */
+.btn:focus,
+.btn:focus-visible,
+button:focus,
+button:focus-visible {
+    outline: 3px solid var(--accent-blue);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.25);
+    border-radius: 8px;
+}
+
+/* Enhanced focus for primary buttons */
+.btn-primary:focus,
+.btn-primary:focus-visible {
+    outline: 3px solid var(--accent-blue);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.25),
+                0 8px 24px var(--shadow-glow);
+    background-color: var(--accent-blue);
+    border-color: var(--accent-blue);
+}
+
+/* Focus indicators for other button variants */
+.btn-secondary:focus,
+.btn-secondary:focus-visible,
+.btn-danger:focus,
+.btn-danger:focus-visible,
+.btn-success:focus,
+.btn-success:focus-visible,
+.btn-warning:focus,
+.btn-warning:focus-visible {
+    outline: 3px solid var(--accent-blue);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.25);
+}
+
+/* Links */
+a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-blue);
+    text-decoration: none;
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 2rem 1.5rem;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Remove Bootstrap default focus outline and use custom */
+*:focus {
+    outline: none;
+}
+
+/* Glassmorphism Navigation (SRS UI-10) */
+.navbar-glass {
+    background: rgba(22, 22, 22, 0.8) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 0;
+}
+
+.navbar-glass .navbar-brand {
+    color: var(--text-primary) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.navbar-glass .nav-link {
+    color: var(--text-secondary) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.2s ease;
+}
+
+.navbar-glass .nav-link:hover {
+    color: var(--accent-blue) !important;
+}
+
+.navbar-glass .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-glass .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Keyboard Accessibility */
+.navbar-glass .nav-link:focus,
+.navbar-glass .navbar-brand:focus {
+    outline: 3px solid var(--accent-blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+    color: var(--accent-blue) !important;
+}
+
+.navbar-glass .navbar-toggler:focus {
+    outline: 3px solid var(--accent-blue);
+    outline-offset: 2px;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.25);
+}
+
+/* Ensure all interactive elements are keyboard accessible */
+.navbar-glass a,
+.navbar-glass button {
+    cursor: pointer;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-blue);
+    color: var(--text-primary);
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Breadcrumb Styling for Dark Theme */
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: var(--text-secondary);
+    content: "/";
+}
+
+.breadcrumb-item a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--accent-blue);
+}
+
+.breadcrumb-item.active {
+    color: var(--text-primary);
+}
+
+/* Interactive Pixel World Map Styling */
+.map-container {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+#world-map {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+/* PIXEL MAP STYLING */
+
+/* Continent pixels - Non-interactive background */
+#world-map .continent-pixels rect {
+    pointer-events: none;
+}
+
+/* Continent labels - Subtle text for context */
+#world-map .continent-label {
+    fill: #444;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    pointer-events: none;
+    user-select: none;
+    text-anchor: middle;
+}
+
+/* Country pixel groups - Interactive */
+#world-map .country-pixels {
+    cursor: pointer;
+    transition: filter 0.3s ease;
+}
+
+/* Individual country pixels - Base styling */
+#world-map .country-pixels .country-pixel {
+    fill: var(--accent-blue);
+    stroke: #0052cc;
+    stroke-width: 1;
+    transition: all 0.2s ease;
+    filter: drop-shadow(0 0 3px rgba(0, 102, 255, 0.5));
+}
+
+/* Country labels inside pixel groups */
+#world-map .country-pixels .country-label {
+    fill: #888;
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    pointer-events: none;
+    user-select: none;
+    text-anchor: middle;
+    transition: fill 0.3s ease;
+}
+
+/* Hitbox for small countries - Larger touch/click target */
+#world-map .country-hitbox {
+    cursor: pointer;
+}
+
+/* Hover effect - Entire country group glows */
+#world-map .country-pixels:hover .country-pixel {
+    fill: var(--accent-purple);
+    stroke: #7c22bd;
+    filter: drop-shadow(0 0 8px rgba(147, 51, 234, 0.7));
+    transform-origin: center;
+}
+
+#world-map .country-pixels:hover .country-label {
+    fill: #fff;
+}
+
+/* Add subtle animation on hover */
+#world-map .country-pixels:hover {
+    animation: pixel-pulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes pixel-pulse {
+    from {
+        filter: drop-shadow(0 0 4px rgba(147, 51, 234, 0.5));
+    }
+    to {
+        filter: drop-shadow(0 0 12px rgba(147, 51, 234, 0.8));
+    }
+}
+
+/* Focus indicator for keyboard navigation (WCAG 2.1 Level AA) */
+#world-map .country-pixels:focus,
+#world-map .country-pixels:focus-visible {
+    outline: 3px solid var(--accent-blue);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+#world-map .country-pixels:focus .country-pixel,
+#world-map .country-pixels:focus-visible .country-pixel {
+    fill: var(--accent-blue);
+    filter: drop-shadow(0 0 12px rgba(0, 102, 255, 0.8));
+}
+
+/* Active/click state */
+#world-map .country-pixels:active .country-pixel {
+    fill: #7c22bd;
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 4px rgba(147, 51, 234, 0.9));
+}
+
+/* Map legend styling */
+#world-map .map-legend rect {
+    rx: 2;
+}
+
+#world-map .map-legend text {
+    font-family: 'Inter', sans-serif;
+}
+
+/* TOOLTIP STYLING */
+
+.map-tooltip {
+    position: absolute;
+    background: rgba(22, 22, 22, 0.95);
+    border: 1px solid rgba(0, 102, 255, 0.3);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.map-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.map-tooltip .tooltip-name {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.map-tooltip .tooltip-action {
+    color: var(--accent-blue);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* RESPONSIVE MAP STYLING */
+
+@media (max-width: 768px) {
+    .map-container {
+        padding: 1rem;
+    }
+    
+    #world-map {
+        max-height: 280px;
+    }
+    
+    #world-map .country-label,
+    #world-map .continent-label {
+        font-size: 9px;
+    }
+    
+    /* Larger touch targets on mobile */
+    #world-map .country-hitbox {
+        transform: scale(1.5);
+        transform-origin: center;
+    }
+}
+
+@media (max-width: 480px) {
+    #world-map {
+        max-height: 220px;
+    }
+    
+    #world-map .country-label {
+        font-size: 8px;
+    }
+    
+    #world-map .continent-label {
+        display: none; /* Hide continent labels on very small screens */
+    }
+}
+
+/* LEGACY SUPPORT */
+
+/* Legacy country path/rect styling (kept for any remaining uses) */
+#world-map path.country-path,
+#world-map rect.country-path {
+    cursor: pointer;
+    transition: fill 0.3s ease, stroke 0.3s ease, filter 0.3s ease;
+}
+
+#world-map path.country-path.available,
+#world-map rect.country-path.available {
+    fill: var(--accent-blue);
+    stroke: var(--accent-blue);
+    stroke-width: 2;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 4px rgba(0, 102, 255, 0.4));
+}
+
+#world-map path.country-path.available:hover,
+#world-map rect.country-path.available:hover {
+    fill: var(--accent-purple);
+    stroke: var(--accent-purple);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px var(--shadow-glow));
+}
+
+/* University Logo */
+.university-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 20px auto;
+    display: block;
+}
+
+/* Program Grid */
+.program-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px; /* Spacious gaps (SRS NFR-15) */
+    padding: 40px 20px;
+}
+
+/* University Grid */
+.university-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 32px; /* Spacious gaps (SRS NFR-15) */
+    padding: 40px 20px;
+}
+
+/* Responsive adjustments for spacious layouts */
+@media (max-width: 768px) {
+    .program-grid,
+    .university-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 24px; /* Slightly smaller gap on mobile */
+        padding: 20px 10px;
+    }
+    
+    .university-logo {
+        width: 100px;
+        height: 100px;
+        margin: 15px auto;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .program-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 28px;
+    }
+    
+    .university-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 28px;
+    }
+}
+
+/* Dashboard Responsive Styling */
+.dashboard-row {
+    gap: 1.5rem;
+}
+
+/* Ensure dashboard cards stack properly on mobile */
+@media (max-width: 767.98px) {
+    .dashboard-row .col-12 {
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Reduce card padding on mobile for better space utilization */
+    .dashboard-row .card-body {
+        padding: 1.5rem;
+    }
+    
+    /* Make table more readable on mobile */
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .table-responsive th,
+    .table-responsive td {
+        padding: 0.5rem;
+    }
+}
+
+/* Ensure proper spacing between dashboard sections on larger screens */
+@media (min-width: 768px) {
+    .dashboard-row .col-md-6:first-child {
+        padding-right: 0.75rem;
+    }
+    
+    .dashboard-row .col-md-6:last-child {
+        padding-left: 0.75rem;
+    }
+}
+
+/* Home Page Statistics Section */
+.stat-card {
+    padding: 2rem 1.5rem;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-number {
+    transition: all 0.3s ease;
+    text-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+}
+
+.stat-card:hover .stat-number {
+    text-shadow: 0 0 30px rgba(0, 102, 255, 0.5);
+    transform: scale(1.05);
+}
+
+/* Purple stat number glow on hover */
+.stat-card:nth-child(2) .stat-number {
+    text-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+}
+
+.stat-card:nth-child(2):hover .stat-number {
+    text-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
+}
+
+.stat-label {
+    margin-top: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.stat-card:hover .stat-label {
+    color: var(--text-primary) !important;
+}
+
+/* Responsive adjustments for statistics */
+@media (max-width: 768px) {
+    .stat-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem !important;
+    }
+    
+    .stat-label {
+        font-size: 1rem !important;
+    }
+}
+
+/*
+   VISUAL DESIGN IMPROVEMENTS
+*/
+
+/* University Logo Container */
+.logo-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.logo-container img {
+    max-height: 100px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Sidebar Card */
+.sidebar-card {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.sidebar-card .logo-container {
+    margin: 0 auto 1.5rem auto;
+    max-width: 200px;
+}
+
+/* Sidebar Card */
+.sidebar-card h3,
+.sidebar-card .h6 {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Card Headings */
+.card h2,
+.card .h5,
+.card h5 {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+}
+
+/* Bootstrap bg-info Badge Override - Dark Theme Friendly */
+.badge.bg-info {
+    background-color: #155e75 !important;
+    color: var(--text-primary) !important;
+}
+
+.badge-focus-research {
+    background-color: var(--accent-blue) !important;
+    color: var(--text-primary) !important;
+}
+
+.badge-focus-industry {
+    background-color: var(--accent-purple) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Enhanced Primary Button with Gradient */
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-blue) 0%, #0052cc 100%);
+    border: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0077ff 0%, var(--accent-blue) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Outline Secondary Button - Dark Theme */
+.btn-outline-secondary {
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    background: transparent;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Hero Section for Home Page */
+.hero-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 50%, var(--accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.8;
+}
+
+.hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.4);
+}
+
+.hero-cta:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(147, 51, 234, 0.5);
+    color: var(--text-primary);
+}
+
+.hero-cta:active {
+    transform: translateY(-1px);
+}
+
+/* Feature Cards for Home Page */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-subtle);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 102, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 102, 255, 0.15);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.feature-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Responsive Hero */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-cta {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Enhanced Card Hover Glow Effect */
+.card-glow:hover {
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(0, 102, 255, 0.1),
+        0 0 40px rgba(0, 102, 255, 0.1);
+}
+
+/* Improved Alert Info for Login Prompts */
+.alert-info {
+    background-color: rgba(0, 102, 255, 0.1);
+    border: 1px solid rgba(0, 102, 255, 0.3);
+    color: var(--text-primary);
+    border-radius: 8px;
+}
+
+.alert-info a {
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+/* Fix for Definition List in Program Detail */
+dl.row dt {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+dl.row dd {
+    color: var(--text-primary);
+}
+
+dl.row dd strong {
+    color: var(--text-primary);
+}
+
+/*
+   NEON EFFECTS - Cinematic Dark Theme Accents
+*/
+
+/* Country Card Glow Effect */
+.browse-country-card,
+.card.h-100 {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+}
+
+/* Browse page country cards */
+.col-12.col-sm-6.col-md-4 .card:hover {
+    box-shadow: 0 0 25px rgba(0, 102, 255, 0.35),
+                0 8px 32px rgba(0, 0, 0, 0.4);
+    border-color: var(--accent-blue);
+    transform: translateY(-6px);
+}
+
+/* Map Container Enhanced Glow */
+.map-container {
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.15),
+                0 10px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(147, 51, 234, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.map-container:hover {
+    box-shadow: 0 0 40px rgba(147, 51, 234, 0.25),
+                0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+/*
+   4.2 UNIVERSITIES PAGE
+*/
+
+/* University Card Neon Border Accent */
+.university-card {
+    border-left: 3px solid var(--accent-blue);
+    position: relative;
+    overflow: hidden;
+}
+
+.university-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.university-card:hover::before {
+    opacity: 1;
+}
+
+.university-card:hover {
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.3),
+                0 12px 24px rgba(0, 0, 0, 0.4);
+    border-left-color: transparent;
+}
+
+/* QS Ranking Badge Glow */
+.qs-badge,
+.card-text strong {
+    transition: text-shadow 0.3s ease;
+}
+
+.university-card:hover .card-text strong {
+    text-shadow: 0 0 8px rgba(0, 102, 255, 0.5);
+}
+
+/* University Logo Hover Effect */
+.university-logo {
+    transition: all 0.3s ease;
+}
+
+.university-card:hover .university-logo {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px rgba(0, 102, 255, 0.3));
+}
+
+/*
+   4.3 PROGRAMS PAGE - Badges & Cards
+*/
+
+/* Program Card Enhanced Hover */
+.program-card {
+    border-left: 3px solid transparent;
+    position: relative;
+}
+
+.program-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent-purple), var(--accent-blue));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.program-card:hover::before {
+    opacity: 1;
+}
+
+.program-card:hover {
+    box-shadow: 0 0 25px rgba(147, 51, 234, 0.25),
+                0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Category Badge Glow */
+.badge.bg-secondary {
+    background: linear-gradient(135deg, #374151, #4b5563) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.program-card:hover .badge.bg-secondary {
+    box-shadow: 0 0 12px rgba(107, 114, 128, 0.5);
+}
+
+/* Research Focus Badge - Purple Glow */
+.badge.bg-info,
+.badge-focus-research {
+    background: linear-gradient(135deg, var(--accent-purple), #7c22bd) !important;
+    box-shadow: 0 2px 8px rgba(147, 51, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.program-card:hover .badge.bg-info,
+.program-card:hover .badge-focus-research {
+    box-shadow: 0 0 15px rgba(147, 51, 234, 0.6);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Industry Focus Badge - Blue/Green Glow */
+.badge.bg-success,
+.badge-focus-industry {
+    background: linear-gradient(135deg, #059669, #10b981) !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    transition: all 0.3s ease;
+}
+
+.program-card:hover .badge.bg-success,
+.program-card:hover .badge-focus-industry {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/*
+   4.4 PROGRAM DETAIL PAGE
+*/
+
+/* Compatibility Badge - SAFE (Green) */
+.alert.badge-safe,
+div.alert.badge-safe,
+.badge.badge-safe {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5),
+                0 0 40px rgba(16, 185, 129, 0.2);
+    animation: pulse-glow-safe 2.5s ease-in-out infinite;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+@keyframes pulse-glow-safe {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5),
+                    0 0 40px rgba(16, 185, 129, 0.2); 
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.7),
+                    0 0 60px rgba(16, 185, 129, 0.3); 
+    }
+}
+
+/* Compatibility Badge - TARGET */
+.alert.badge-target,
+div.alert.badge-target,
+.badge.badge-target {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.5),
+                0 0 40px rgba(245, 158, 11, 0.2);
+    animation: pulse-glow-target 2.5s ease-in-out infinite;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+}
+
+@keyframes pulse-glow-target {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.5),
+                    0 0 40px rgba(245, 158, 11, 0.2); 
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(245, 158, 11, 0.7),
+                    0 0 60px rgba(245, 158, 11, 0.3); 
+    }
+}
+
+/* Compatibility Badge - REACH */
+.alert.badge-reach,
+div.alert.badge-reach,
+.badge.badge-reach {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.5),
+                0 0 40px rgba(239, 68, 68, 0.2);
+    animation: pulse-glow-reach 2.5s ease-in-out infinite;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+@keyframes pulse-glow-reach {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.5),
+                    0 0 40px rgba(239, 68, 68, 0.2); 
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.7),
+                    0 0 60px rgba(239, 68, 68, 0.3); 
+    }
+}
+
+/* Sidebar Card Enhanced */
+.sidebar-card {
+    border: 1px solid rgba(0, 102, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.sidebar-card:hover {
+    border-color: rgba(0, 102, 255, 0.3);
+    box-shadow: 0 0 25px rgba(0, 102, 255, 0.15),
+                0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Add to List Button */
+.sidebar-card .btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-card .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.sidebar-card .btn-primary:hover::after {
+    animation: shimmer 1.5s ease-in-out;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -50%;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        left: 150%;
+        opacity: 0;
+    }
+}
+
+/* Logo Container Glow */
+.logo-container {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-card:hover .logo-container {
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.2),
+                0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/*
+   4.5 DASHBOARD PAGE
+*/
+
+/* Profile Section Accent Border */
+.dashboard-row .col-12.col-md-6:first-child .card {
+    border-left: 4px solid var(--accent-blue);
+    position: relative;
+}
+
+.dashboard-row .col-12.col-md-6:first-child .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -4px;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dashboard-row .col-12.col-md-6:first-child .card:hover::before {
+    opacity: 1;
+}
+
+.dashboard-row .col-12.col-md-6:first-child .card:hover {
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.15),
+                0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Shortlist Section Accent Border */
+.dashboard-row .col-12.col-md-6:last-child .card {
+    border-left: 4px solid var(--accent-purple);
+}
+
+.dashboard-row .col-12.col-md-6:last-child .card:hover {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.15),
+                0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Shortlist Table Row Hover Glow */
+.table-striped tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table-striped tbody tr:hover {
+    background: rgba(0, 102, 255, 0.08) !important;
+    box-shadow: inset 0 0 20px rgba(0, 102, 255, 0.1);
+}
+
+/* Table Text Colors for Dark Theme */
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.02);
+    color: var(--text-primary);
+}
+
+.table thead th {
+    color: #c0c0c0 !important;
+    border-bottom-color: var(--border-subtle);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table tbody td {
+    border-bottom-color: var(--border-subtle);
+    vertical-align: middle;
+    color: var(--text-primary);
+}
+
+/* Specific table cells that need lighter text */
+.table tbody td:not(:first-child):not(:last-child) {
+    color: #d0d0d0;
+}
+
+.table tbody td a {
+    color: #66b3ff;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.table tbody td a:hover {
+    color: #99ccff;  /* Even lighter on hover */
+    text-shadow: 0 0 8px rgba(102, 179, 255, 0.5);
+    text-decoration: underline;
+}
+
+/* Dashboard Compatibility Badges in Table */
+.table .badge.badge-safe,
+.table .badge.badge-target,
+.table .badge.badge-reach {
+    animation: none;
+}
+
+.table .badge.badge-safe {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.table .badge.badge-target {
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+}
+
+.table .badge.badge-reach {
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+/* Update Profile Button */
+.dashboard-row .btn-primary {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+}
+
+.dashboard-row .btn-primary:hover {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+    box-shadow: 0 6px 25px rgba(147, 51, 234, 0.4);
+    transform: translateY(-2px);
+}
+
+/*
+   4.6 LOGIN/REGISTER PAGES - Forms
+*/
+
+/* Auth Card with Gradient Border */
+.container > .row.justify-content-center .card {
+    position: relative;
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    background: var(--bg-card);
+}
+
+.container > .row.justify-content-center .card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-blue));
+    border-radius: 13px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.container > .row.justify-content-center .card:hover::before {
+    opacity: 0.3;
+}
+
+.container > .row.justify-content-center .card:hover {
+    box-shadow: 0 0 30px rgba(0, 102, 255, 0.2),
+                0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Input Focus Neon Glow */
+.form-control:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.2),
+                0 0 20px rgba(0, 102, 255, 0.15);
+}
+
+/* Submit Button Animated Gradient */
+.btn-primary.btn-lg {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    border: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.4);
+}
+
+.btn-primary.btn-lg:hover {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+    box-shadow: 0 6px 30px rgba(147, 51, 234, 0.5),
+                0 0 40px rgba(0, 102, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-primary.btn-lg:active {
+    transform: translateY(0);
+}
+
+/* Auth Links Hover Glow */
+.container > .row.justify-content-center a {
+    color: var(--accent-blue);
+    transition: all 0.2s ease;
+}
+
+.container > .row.justify-content-center a:hover {
+    color: var(--text-primary);
+    text-shadow: 0 0 10px rgba(0, 102, 255, 0.6);
+}
+
+/*
+   REDUCED MOTION - Accessibility
+*/
+
+@media (prefers-reduced-motion: reduce) {
+    .alert.badge-safe,
+    .alert.badge-target,
+    .alert.badge-reach,
+    .badge.badge-safe,
+    .badge.badge-target,
+    .badge.badge-reach {
+        animation: none;
+    }
+    
+    .sidebar-card .btn-primary:hover::after {
+        animation: none;
+    }
+    
+    #world-map .country-pixels:hover {
+        animation: none;
+    }
+}
+
+/*
+   NEON LINK EFFECTS
+*/
+
+/* Breadcrumb links glow */
+.breadcrumb-item a:hover {
+    text-shadow: 0 0 8px rgba(0, 102, 255, 0.5);
+}
+
+/* Nav links glow */
+.navbar-glass .nav-link:hover {
+    text-shadow: 0 0 10px rgba(0, 102, 255, 0.4);
+}
+
+/* Outline button variants with glow */
+.btn-outline-primary {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
+    color: var(--text-primary);
+}
+
+/* Danger button glow for remove actions */
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+    transform: translateY(-1px);
+}
+

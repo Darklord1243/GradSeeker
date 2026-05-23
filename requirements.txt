@@ -1,0 +1,20 @@
+# GradSeeker - Python Dependencies
+# Flask Web Application for Master's Degree Program Discovery
+
+# Core Flask Framework
+Flask>=2.3.0,<3.0.0
+
+# Database ORM
+Flask-SQLAlchemy>=3.0.0,<4.0.0
+SQLAlchemy>=2.0.0,<3.0.0
+
+# Authentication
+Flask-Login>=0.6.3,<1.0.0
+
+# Password Hashing (comes with Flask, but explicit for clarity)
+Werkzeug>=2.3.0,<3.0.0
+
+# Testing Framework
+pytest>=7.4.0,<8.0.0
+pytest-cov>=4.1.0,<5.0.0  # Optional: for test coverage reports
+

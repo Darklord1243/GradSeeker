@@ -1,0 +1,511 @@
+{% extends "base.html" %}
+
+{% block title %}Browse Programs - GradSeeker{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Browse Programs by Country</h1>
+    
+    <!-- Interactive Pixel World Map -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="mb-3" id="map-heading">Select a Country on the Map</h2>
+            <p class="instruction-text mb-3" id="map-instructions">
+                Click on a highlighted country to explore universities. Available countries glow in blue.
+                Use Tab to navigate and Enter to select.
+            </p>
+            
+            <!-- Text-Based Fallback (Accessibility) -->
+            <div class="map-fallback mb-4" role="region" aria-label="Alternative country selection">
+                <label for="country-select" class="form-label">
+                    <strong>Or select a country from the list:</strong>
+                </label>
+                <select id="country-select" 
+                        class="form-select form-select-lg" 
+                        aria-label="Select a country to browse universities"
+                        aria-describedby="fallback-instructions">
+                    <option value="">Choose a country...</option>
+                    {% if countries %}
+                        {% for country in countries %}
+                        <option value="{{ country|country_slug }}">{{ country }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                <small id="fallback-instructions" class="form-text instruction-text d-block mt-2">
+                    Select a country from the dropdown above to browse available universities and programs.
+                </small>
+            </div>
+            
+            <div class="map-container" style="width: 100%; max-width: 1000px; margin: 0 auto;" 
+                 role="region" 
+                 aria-labelledby="map-heading" 
+                 aria-describedby="map-instructions">
+                
+                <!-- PIXEL ART WORLD MAP -->
+                <svg id="world-map" 
+                     viewBox="0 0 1000 500" 
+                     xmlns="http://www.w3.org/2000/svg" 
+                     aria-label="Interactive pixel world map for country selection" 
+                     aria-describedby="map-instructions"
+                     role="application"
+                     aria-live="polite">
+                    
+                    <!-- Dark background -->
+                    <rect width="1000" height="500" fill="#0d0d0d" style="pointer-events: none;"/>
+                    
+                    <!-- Grid lines -->
+                    <defs>
+                        <pattern id="pixel-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <rect width="20" height="20" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+                        </pattern>
+                    </defs>
+                    <rect width="1000" height="500" fill="url(#pixel-grid)" opacity="0.3" style="pointer-events: none;"/>
+                    
+                    <!-- UNAVAILABLE COUNTRIES -->
+
+                    <!-- NORTH AMERICA (excluding USA) - Canada, Mexico -->
+                    <g class="continent-pixels" aria-hidden="true">
+                        <!-- Canada (grey background) -->
+                        <rect x="80" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="100" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="120" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="140" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="160" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="180" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="60" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="80" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="100" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="120" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="140" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="160" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="180" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="220" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="60" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="80" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="100" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="120" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="140" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="160" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="180" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="220" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="240" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- Mexico -->
+                        <rect x="100" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="120" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="80" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="100" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="120" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="80" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="100" y="220" width="18" height="18" fill="#1e1e1e"/>
+                    </g>
+                    
+                    <!-- SOUTH AMERICA -->
+                    <g class="continent-pixels" aria-hidden="true">
+                        <rect x="180" y="260" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="260" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="220" y="260" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="160" y="280" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="180" y="280" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="280" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="220" y="280" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="240" y="280" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="160" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="180" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="220" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="240" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="180" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="220" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="340" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="220" y="340" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="360" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="220" y="360" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="380" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="200" y="400" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="180" y="420" width="18" height="18" fill="#1e1e1e"/>
+                    </g>
+                    
+                    <!-- EUROPE (excluding Ireland) -->
+                    <g class="continent-pixels" aria-hidden="true">
+                        <!-- UK -->
+                        <rect x="400" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="400" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="400" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- Scandinavia -->
+                        <rect x="440" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="440" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="440" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- Western/Central Europe -->
+                        <rect x="420" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="440" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="420" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="440" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="520" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="420" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="440" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- Southern Europe -->
+                        <rect x="440" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="160" width="18" height="18" fill="#1e1e1e"/>
+                    </g>
+                    
+                    <!-- AFRICA -->
+                    <g class="continent-pixels" aria-hidden="true">
+                        <rect x="440" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="520" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="420" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="440" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="520" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="420" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="440" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="520" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="560" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="440" y="240" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="240" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="240" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="240" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="520" y="240" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="240" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="560" y="240" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="460" y="260" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="260" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="260" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="520" y="260" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="260" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="480" y="280" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="280" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="520" y="280" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="280" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="500" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="520" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="520" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="340" width="18" height="18" fill="#1e1e1e"/>
+                    </g>
+                    
+                    <!-- ASIA (excluding Japan, Singapore, Hong Kong) -->
+                    <g class="continent-pixels" aria-hidden="true">
+                        <!-- Russia -->
+                        <rect x="540" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="560" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="580" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="600" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="620" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="640" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="660" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="680" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="720" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="760" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="780" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="800" y="40" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="560" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="580" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="600" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="620" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="640" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="660" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="680" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="720" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="760" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="780" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="800" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="820" y="60" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="540" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="560" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="580" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="600" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="620" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="640" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="660" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="680" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="720" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="760" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="780" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="800" y="80" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- Central Asia -->
+                        <rect x="560" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="580" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="600" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="620" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="640" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="660" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="680" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="720" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="760" y="100" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- Middle East & South Asia -->
+                        <rect x="560" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="580" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="600" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="620" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="640" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="660" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="680" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="720" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="560" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="580" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="600" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="620" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="640" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="660" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="680" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="720" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="760" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- India region -->
+                        <rect x="620" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="640" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="660" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="680" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="640" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="660" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="680" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="720" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="660" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="680" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- Southeast Asia -->
+                        <rect x="720" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="760" y="200" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="700" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="720" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="760" y="220" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="720" y="240" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="240" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="740" y="260" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- China -->
+                        <rect x="760" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="780" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="800" y="120" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="780" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="800" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="820" y="140" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="780" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="800" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="820" y="160" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="780" y="180" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="800" y="180" width="18" height="18" fill="#1e1e1e"/>
+                    </g>
+                    
+                    <!-- AUSTRALIA -->
+                    <g class="continent-pixels" aria-hidden="true">
+                        <rect x="820" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="840" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="860" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="880" y="300" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="800" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="820" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="840" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="860" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="880" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="900" y="320" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="820" y="340" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="840" y="340" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="860" y="340" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="880" y="340" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="900" y="340" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="920" y="340" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="840" y="360" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="860" y="360" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="880" y="360" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="900" y="360" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="860" y="380" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="880" y="380" width="18" height="18" fill="#1e1e1e"/>
+                        <!-- New Zealand -->
+                        <rect x="940" y="400" width="18" height="18" fill="#1e1e1e"/>
+                        <rect x="940" y="420" width="18" height="18" fill="#1e1e1e"/>
+                    </g>
+                    
+                    <!-- AVAILABLE COUNTRIES (Interactive - Highlighted) -->
+                    
+                    <!-- USA - Multiple pixels forming USA shape -->
+                    <g id="usa" class="country-pixels" aria-label="United States of America">
+                        <title>United States of America - Click to explore universities</title>
+                        <rect x="60" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="80" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="100" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="120" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="140" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="160" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="180" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="200" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="220" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="60" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="80" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="100" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="120" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="140" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="160" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="180" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="200" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="220" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="240" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="80" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="100" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="120" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="140" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="160" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="180" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="200" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="220" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="240" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="100" y="160" width="18" height="18" class="country-pixel"/>
+                        <rect x="120" y="160" width="18" height="18" class="country-pixel"/>
+                        <rect x="140" y="160" width="18" height="18" class="country-pixel"/>
+                        <rect x="160" y="160" width="18" height="18" class="country-pixel"/>
+                        <rect x="180" y="160" width="18" height="18" class="country-pixel"/>
+                        <rect x="200" y="160" width="18" height="18" class="country-pixel"/>
+                        <rect x="220" y="160" width="18" height="18" class="country-pixel"/>
+                        <rect x="240" y="160" width="18" height="18" class="country-pixel"/>
+                        <!-- Alaska (small cluster) -->
+                        <rect x="40" y="60" width="18" height="18" class="country-pixel"/>
+                        <rect x="20" y="80" width="18" height="18" class="country-pixel"/>
+                        <rect x="40" y="80" width="18" height="18" class="country-pixel"/>
+                        <!-- Label -->
+                        <text x="150" y="195" class="country-label">USA</text>
+                    </g>
+                    
+                    <!-- IRELAND - Small island in Europe -->
+                    <g id="ireland" class="country-pixels" aria-label="Ireland">
+                        <title>Ireland - Click to explore universities</title>
+                        <rect x="380" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="380" y="120" width="18" height="18" class="country-pixel"/>
+                        <!-- Larger clickable area for accessibility -->
+                        <rect x="365" y="85" width="48" height="68" fill="transparent" class="country-hitbox"/>
+                        <!-- Label -->
+                        <text x="389" y="155" class="country-label">Ireland</text>
+                    </g>
+                    
+                    <!-- JAPAN - Island chain off east Asia -->
+                    <g id="japan" class="country-pixels" aria-label="Japan">
+                        <title>Japan - Click to explore universities</title>
+                        <rect x="860" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="880" y="100" width="18" height="18" class="country-pixel"/>
+                        <rect x="860" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="880" y="120" width="18" height="18" class="country-pixel"/>
+                        <rect x="880" y="140" width="18" height="18" class="country-pixel"/>
+                        <rect x="860" y="160" width="18" height="18" class="country-pixel"/>
+                        <rect x="880" y="160" width="18" height="18" class="country-pixel"/>
+                        <rect x="860" y="180" width="18" height="18" class="country-pixel"/>
+                        <!-- Label -->
+                        <text x="870" y="210" class="country-label">Japan</text>
+                    </g>
+                    
+                    <!-- HONG KONG - Small region in South China -->
+                    <g id="hong-kong" class="country-pixels" aria-label="Hong Kong">
+                        <title>Hong Kong - Click to explore universities</title>
+                        <rect x="820" y="200" width="18" height="18" class="country-pixel"/>
+                        <rect x="820" y="220" width="18" height="18" class="country-pixel"/>
+                        <!-- Larger clickable area for accessibility -->
+                        <rect x="805" y="185" width="48" height="68" fill="transparent" class="country-hitbox"/>
+                        <!-- Label with background for visibility -->
+                        <text x="829" y="255" class="country-label">HK</text>
+                    </g>
+                    
+                    <!-- SINGAPORE - Small island in Southeast Asia -->
+                    <g id="singapore" class="country-pixels" aria-label="Singapore">
+                        <title>Singapore - Click to explore universities</title>
+                        <rect x="760" y="260" width="18" height="18" class="country-pixel"/>
+                        <rect x="760" y="280" width="18" height="18" class="country-pixel"/>
+                        <!-- Larger clickable area for accessibility -->
+                        <rect x="745" y="245" width="48" height="68" fill="transparent" class="country-hitbox"/>
+                        <!-- Label -->
+                        <text x="769" y="315" class="country-label">SG</text>
+                    </g>
+                    
+                    <!-- CONTINENT LABELS (for context) -->
+                    <g class="continent-labels" aria-hidden="true">
+                        <text x="130" y="240" class="continent-label">N. America</text>
+                        <text x="190" y="360" class="continent-label">S. America</text>
+                        <text x="450" y="175" class="continent-label">Europe</text>
+                        <text x="500" y="320" class="continent-label">Africa</text>
+                        <text x="680" y="90" class="continent-label">Asia</text>
+                        <text x="850" y="400" class="continent-label">Australia</text>
+                    </g>
+                    
+                    <!-- Legend -->
+                    <g class="map-legend" transform="translate(20, 440)">
+                        <rect x="0" y="0" width="16" height="16" fill="#0066ff" rx="2"/>
+                        <text x="24" y="13" fill="#888" font-size="12" font-family="Inter, sans-serif">Available Countries (Click to explore)</text>
+                    </g>
+                    
+                </svg>
+                
+                <!-- Tooltip container (for hover info) -->
+                <div id="map-tooltip" class="map-tooltip" role="tooltip" aria-hidden="true">
+                    <span class="tooltip-name"></span>
+                    <span class="tooltip-action">Click to explore</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if countries %}
+    <div class="row g-4" role="list" aria-label="Country selection">
+        {% for country in countries %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4" role="listitem">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title" style="color: var(--text-primary);">{{ country }}</h5>
+                    <p class="card-text card-description">Explore graduate programs in {{ country }}</p>
+                    <a href="/browse/{{ country|country_slug }}" class="btn btn-primary mt-auto">Browse Programs</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No countries available. Please load data into the database.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<!-- Interactive Pixel World Map JavaScript -->
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GradSeeker{% endblock %}</title>
+
+    <!--
+    Third-Party Resources:
+    - Bootstrap 5.3.0 (MIT License) - https://getbootstrap.com/
+    - Inter Font (OFL License) - https://fonts.google.com/specimen/Inter
+    All other code and design is original work by LIN YUHAO
+    -->
+    
+    <!-- Preconnect to CDNs for faster loading -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    
+    <!-- Bootstrap 5 CSS (Primary CDN with local fallback) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+          crossorigin="anonymous"
+          id="bootstrap-css"
+          onerror="this.onerror=null; this.removeAttribute('integrity'); this.removeAttribute('crossorigin'); this.href='{{ url_for('static', filename='css/bootstrap.min.css') }}'; console.log('Bootstrap CSS loaded from local fallback');">
+    
+    <!-- Bootstrap 5 CSS Fallback for noscript -->
+    <noscript>
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    </noscript>
+    
+    <!-- Inter Font (SRS UI-11) - Primary -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Inter Font Fallback (if Google Fonts fails) -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:400,500,600,700" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:400,500,600,700">
+    </noscript>
+    
+    <!-- Custom CSS with Dark Theme Variables -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-glass">
+        <div class="container">
+            <a class="navbar-brand" href="/">GradSeeker</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/browse">Browse</a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="container mt-3">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Bootstrap 5 JS Bundle (Primary CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
+            crossorigin="anonymous"
+            id="bootstrap-js"></script>
+    
+    <!-- Bootstrap JS Local Fallback -->
+    <script>
+        // Check if Bootstrap loaded from CDN, load local fallback if not
+        window.addEventListener('load', function() {
+            if (typeof bootstrap === 'undefined') {
+                console.warn('Bootstrap JS CDN failed, loading local fallback...');
+                const fallback = document.createElement('script');
+                fallback.src = '{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}';
+                fallback.onload = function() {
+                    console.log('Bootstrap JS loaded from local fallback');
+                };
+                document.body.appendChild(fallback);
+            }
+        });
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,37 @@
+university_name,country,qs_rank,logo_url,program_name,category,min_gpa,min_toefl,tuition_fee,deadline,research_focus,industry_focus
+National University of Singapore,Singapore,8,national-university-of-singapore.png,Master of Science in Data Science and Machine Learning,AI,3.6,85,"58,860 SGD/year",Jul 2026,1,1
+National University of Singapore,Singapore,8,national-university-of-singapore.png,Master of Computing (Computer Science Specialisation),CS,3.5,90,"67,144 SGD/year",Jan 2027,0,1
+The University of Hong Kong,Hong Kong,17,the-university-of-hong-kong.png,Master of Science in Computer Science,CS,3.5,80,"334,800 HKD/year",Mar 2027,1,0
+The University of Hong Kong,Hong Kong,17,the-university-of-hong-kong.png,Master of Science in Artificial Intelligence,AI,3.6,80,"390,000 HKD/year",Feb 2027,1,0
+NanYang Technological University,Singapore,15,nanyang-technological-university.png,Master of Science in Artificial Intelligence (MSAI),AI,3.6,100,"63,220 SGD/year",Mar 2027,1,0
+The Chinese University of Hong Kong,Hong Kong,36,the-chinese-university-of-hong-kong.png,Master of Science in Artificial Intelligence,AI,3.4,79,"380,000 HKD/year",Feb 2027,1,0
+The Hong Kong University of Science and Technology,Hong Kong,47,the-hong-kong-university-of-science-and-technology.png,Master of Science Program in Artificial Intelligence,AI,3.4,80,"400,000 HKD/year",Jan 2027,1,0
+The Hong Kong University of Science and Technology,Hong Kong,47,the-hong-kong-university-of-science-and-technology.png,Master of Science in Information Technology,IT,3.3,80,"300,000 HKD/year",Jan 2027,0,1
+Trinity College Dublin,Ireland,81,trinity-college-dublin.png,Computer Science - Intelligent Systems,CS,3.3,90,"27,790 EUR/year",Jul 2027,1,0
+The University of Tokyo,Japan,32,the-university-of-tokyo.png,Master of Information Science and Technology,CS,3.5,90,"535,800 JPY/year",Dec 2026,1,0
+The University of Tokyo,Japan,32,the-university-of-tokyo.png,Master of Information and Communication Engineering,IT,3.4,85,"535,800 JPY/year",Dec 2026,1,0
+Kyoto University,Japan,50,kyoto-university.png,Master of Informatics,CS,3.4,80,"535,800 JPY/year",Jan 2027,1,0
+Kyoto University,Japan,50,kyoto-university.png,Master of Intelligence Science and Technology,AI,3.5,85,"535,800 JPY/year",Jan 2027,1,0
+Tohoku University,Japan,107,tohoku-university.png,Master of Information Sciences,CS,3.2,79,"535,800 JPY/year",Feb 2027,1,0
+Institute of Science Tokyo,Japan,84,institute-of-science-tokyo.png,Master of Computer Science,CS,3.5,90,"535,800 JPY/year",Dec 2026,1,0
+Institute of Science Tokyo,Japan,84,institute-of-science-tokyo.png,Master of Artificial Intelligence,AI,3.5,90,"535,800 JPY/year",Dec 2026,1,0
+Osaka University,Japan,86,osaka-university.png,Master of Information Science and Technology,CS,3.3,80,"535,800 JPY/year",Jan 2027,1,0
+Duke University,USA,57,duke-university.png,Master of Science in Computer Science,CS,3.5,90,"65,188 USD/year",Jan 2027,1,0
+Duke University,USA,57,duke-university.png,Master of Engineering in Artificial Intelligence,AI,3.4,90,"65,188 USD/year",Jan 2027,0,1
+Johns Hopkins University,USA,52,john-hopkins-university.png,Master of Science in Computer Science,CS,3.5,100,"62,720 USD/year",Jan 2027,1,0
+Johns Hopkins University,USA,52,john-hopkins-university.png,Master of Science in Artificial Intelligence,AI,3.5,100,"62,720 USD/year",Feb 2027,1,0
+Northwestern University,USA,47,northwestern-university.png,Master of Science in Computer Science,CS,3.5,90,"62,664 USD/year",Dec 2026,1,0
+Northwestern University,USA,47,northwestern-university.png,Master of Science in Artificial Intelligence,AI,3.5,95,"62,664 USD/year",Jan 2027,1,0
+University of Pennsylvania,USA,11,university-of-pennsylvania.png,Master of Science in Engineering in Computer and Information Science,CS,3.6,100,"67,266 USD/year",Dec 2026,1,0
+University of Pennsylvania,USA,11,university-of-pennsylvania.png,Master of Science in Engineering in Artificial Intelligence,AI,3.6,100,"67,266 USD/year",Dec 2026,1,0
+Cornell University,USA,13,cornell-university.png,Master of Engineering in Computer Science,CS,3.5,100,"63,200 USD/year",Feb 2027,0,1
+Cornell University,USA,13,cornell-university.png,Master of Science in Computer Science,CS,3.7,100,"63,200 USD/year",Dec 2026,1,0
+Columbia University,USA,34,columbia-university.png,Master of Science in Computer Science,CS,3.5,101,"63,530 USD/year",Feb 2027,1,0
+Columbia University,USA,34,columbia-university.png,Master of Science in Machine Learning,AI,3.6,101,"63,530 USD/year",Jan 2027,1,0
+University of California-Berkeley,USA,10,university-of-california-berkeley.png,Master of Engineering in EECS,CS,3.5,90,"58,794 USD/year",Jan 2027,0,1
+University of California-Berkeley,USA,10,university-of-california-berkeley.png,Master of Science in EECS,CS,3.8,100,"28,000 USD/year",Dec 2026,1,0
+University of Michigan-Ann Arbor,USA,33,university-of-michigan-ann-arbor.png,Master of Science in Computer Science and Engineering,CS,3.5,100,"55,900 USD/year",Dec 2026,1,0
+University of Michigan-Ann Arbor,USA,33,university-of-michigan-ann-arbor.png,Master of Science in Data Science,DS,3.4,100,"55,900 USD/year",Jan 2027,0,1
+Carnegie Mellon University,USA,24,carnegie-mellon-university.png,Master of Science in Computer Science,CS,3.7,100,"57,560 USD/year",Dec 2026,1,0
+Carnegie Mellon University,USA,24,carnegie-mellon-university.png,Master of Science in Machine Learning,AI,3.7,100,"57,560 USD/year",Dec 2026,1,0
+Carnegie Mellon University,USA,24,carnegie-mellon-university.png,Master of Science in Artificial Intelligence and Innovation,AI,3.5,100,"57,560 USD/year",Jan 2027,0,1

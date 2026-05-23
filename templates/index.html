@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Home - GradSeeker{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section - Enhanced -->
+    <div class="hero-section">
+        <h1 class="hero-title">GradSeeker</h1>
+        <p class="hero-subtitle">
+            Discover your perfect Master's program. Compare requirements, 
+            calculate your compatibility, and shortlist your dream universities 
+            — all in one place.
+        </p>
+        <a href="/browse" class="hero-cta">
+            <span>Start Exploring</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Statistics Section -->
+    {% if total_programs is defined and total_programs > 0 %}
+    <div class="row mb-5 justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="stat-card">
+                        <h2 class="display-3 mb-2 stat-number" style="color: var(--accent-blue); font-weight: 700;">
+                            {{ total_programs }}
+                        </h2>
+                        <p class="stat-label" style="color: var(--text-secondary); font-size: 1.1rem; font-weight: 500;">
+                            Graduate Programs
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="stat-card">
+                        <h2 class="display-3 mb-2 stat-number" style="color: var(--accent-purple); font-weight: 700;">
+                            {{ total_universities }}
+                        </h2>
+                        <p class="stat-label" style="color: var(--text-secondary); font-size: 1.1rem; font-weight: 500;">
+                            Top Universities
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="stat-card">
+                        <h2 class="display-3 mb-2 stat-number" style="color: var(--accent-blue); font-weight: 700;">
+                            {{ total_countries }}
+                        </h2>
+                        <p class="stat-label" style="color: var(--text-secondary); font-size: 1.1rem; font-weight: 500;">
+                            Countries
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Feature Highlights -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-12 col-lg-10">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Global Discovery</h3>
+                    <p class="feature-description">
+                        Browse programs across USA, Ireland, Japan, Singapore, and Hong Kong
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Smart Matching</h3>
+                    <p class="feature-description">
+                        Get compatibility scores based on your GPA, TOEFL, and experience
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="feature-title">Personal Shortlist</h3>
+                    <p class="feature-description">
+                        Save and compare your favorite programs in one place
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
