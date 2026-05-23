@@ -91,6 +91,7 @@ pytest --cov=. --cov-report=term-missing
 | [docs/SRS.md](docs/SRS.md) | Software Requirements Specification |
 | [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) | RFC-style implementation plan |
 | [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) | PythonAnywhere deployment guide |
+| [docs/README.md](docs/README.md) | Documentation index |
 
 ## Deployment
 
