@@ -9,9 +9,9 @@ env/
 ENV/
 xjco2011_env/
 
-# Flask
-instance/database.db
-instance/*.db
+# Flask / SQLite (keep instance/ folder via .gitkeep only)
+instance/*
+!instance/.gitkeep
 *.db-journal
 
 # Testing
