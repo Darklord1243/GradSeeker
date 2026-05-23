@@ -2,7 +2,9 @@
 
 Discover your perfect Master's program. Compare requirements, calculate your compatibility, and shortlist your dream universities — all in one place.
 
-**GradSeeker** is a Flask web application built for the XJCO2011 Web Application module. It works like a shopping platform for graduate degrees: users browse programs by country, build a shortlist ("shopping cart"), and see algorithmic compatibility scores based on their academic profile ("The Wallet").
+**GradSeeker** is a Flask web application built for the XJCO2011 Web Application module (University of Leeds). It works like a shopping platform for graduate degrees: users browse programs by country, build a shortlist ("shopping cart"), and see algorithmic compatibility scores based on their academic profile ("The Wallet").
+
+**Repository:** [github.com/Darklord1243/GradSeeker](https://github.com/Darklord1243/GradSeeker)
 
 ## Features
 
@@ -93,6 +95,14 @@ pytest --cov=. --cov-report=term-missing
 ## Deployment
 
 See [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) for step-by-step PythonAnywhere instructions.
+
+## What Not to Commit
+
+The following are generated locally and excluded via `.gitignore`:
+
+- `__pycache__/` and `*.pyc`
+- `instance/database.db` (SQLite database)
+- `.pytest_cache/`, virtual environments, and `.env` files
 
 ## Author
 
